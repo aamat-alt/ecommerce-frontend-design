@@ -1,7 +1,6 @@
 import React from 'react';
 import { Search, User, MessageSquare, Heart, ShoppingCart, Menu, ChevronDown } from 'lucide-react';
 import logo from '../assets/Layout/Brand/logo-colored.png';
-import flagDE from '../assets/Layout1/Image/flags/DE@2x.png';
 
 const Header = ({ setPage }) => {
   return (
@@ -75,22 +74,8 @@ const Header = ({ setPage }) => {
             </div>
             <a href="#" className="hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); setPage('listing'); }}>Hot offers</a>
  
-            <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
-              <span>Help</span>
-              <ChevronDown className="w-4 h-4" />
-            </div>
           </nav>
 
-          <div className="flex items-center gap-6 font-medium text-dark">
-            <div className="flex items-center gap-1 cursor-pointer">
-              <span>English, USD</span>
-              <ChevronDown className="w-4 h-4 text-secondary" />
-            </div>
-            <div className="flex items-center gap-1 cursor-pointer">
-              <span>Ship to</span>
-              <img src={flagDE} alt="DE" className="w-5 h-3 rounded-sm shadow-sm" />
-              <ChevronDown className="w-4 h-4 text-secondary" />
-            </div>
           </div>
         </div>
       </div>
