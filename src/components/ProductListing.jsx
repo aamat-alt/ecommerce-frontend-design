@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, Grid, List, ChevronDown, Star, Heart, X, Search, SlidersHorizontal } from 'lucide-react';
 import API from '../api';
 
-const ProductListing = ({ setPage }) => {
+const ProductListing = ({ setPage, initialCategory }) => {
   const [viewMode, setViewMode] = useState('grid');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(initialCategory || '');
+
+  useEffect(() => {
+    if (initialCategory !== undefined) {
+      setCategory(initialCategory);
+    }
+  }, [initialCategory]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
