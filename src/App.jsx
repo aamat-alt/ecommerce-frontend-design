@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
-import Login from './components/Login';
-
 import Header from './components/Header';
 import Hero from './components/Hero';
 import CategorySection from './components/CategorySection';
-import InquiryForm from './components/InquiryForm';
-import RecommendedItems from './components/RecommendedItems';
-import Services from './components/Services';
-import RegionSuppliers from './components/RegionSuppliers';
-import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
 import ProductListing from './components/ProductListing';
 import ProductDetails from './components/ProductDetails';
@@ -16,12 +9,11 @@ import Cart from './components/Cart';
 import Profile from './components/Profile';
 import Messages from './components/Messages';
 import Orders from './components/Orders';
+import Login from './components/Login';
 
-// Category Banner Images
 import homeBanner from './assets/Image/backgrounds/image 98.png';
 import electronicsBanner from './assets/Image/backgrounds/image 106.png';
 
-// Home and Outdoor Images
 import itemH1 from './assets/Image/interior/1.png';
 import itemH2 from './assets/Image/interior/3.png';
 import itemH3 from './assets/Image/interior/6.png';
@@ -31,7 +23,6 @@ import itemH6 from './assets/Image/interior/9.png';
 import itemH7 from './assets/Image/interior/image 89.png';
 import itemH8 from './assets/Image/interior/image 93.png';
 
-// Electronics Images
 import itemE1 from './assets/Image/tech/8.png';
 import itemE2 from './assets/Image/tech/image 85.png';
 import itemE3 from './assets/Image/tech/image 32.png';
@@ -40,7 +31,6 @@ import itemE5 from './assets/Image/tech/image 34.png';
 import itemE6 from './assets/Image/tech/image 23.png';
 import itemE7 from './assets/Image/tech/image 86.png';
 import itemE8 from './assets/Image/tech/6.png';
-
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -82,13 +72,11 @@ function App() {
       case 'orders':
         return <Orders setPage={setCurrentPage} />;
       case 'login':
-  return <Login setPage={setCurrentPage} />;  
+        return <Login setPage={setCurrentPage} />;
       default:
         return (
           <div className="container">
             <Hero />
-            
-
             <CategorySection
               title="Home and outdoor"
               bannerBg="#FFE6BF"
@@ -96,7 +84,6 @@ function App() {
               items={homeAndOutdoorItems}
               setPage={setCurrentPage}
             />
-
             <CategorySection
               title="Consumer electronics"
               bannerBg="#E5F1FF"
@@ -104,11 +91,6 @@ function App() {
               items={electronicsItems}
               setPage={setCurrentPage}
             />
-
-            <InquiryForm />
-            <RecommendedItems setPage={setCurrentPage} />
-            <Services />
-            <RegionSuppliers />
           </div>
         );
     }
@@ -117,16 +99,12 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header setPage={setCurrentPage} />
-
       <main className="flex-grow pb-12">
         {renderContent()}
       </main>
-
-      <Newsletter />
       <Footer />
     </div>
   );
 }
 
 export default App;
-

@@ -34,9 +34,7 @@ const Hero = () => {
            <div className="relative z-10 w-1/2">
              <h3 className="text-2xl font-normal text-dark mb-1">Latest trending</h3>
              <h2 className="text-[32px] font-bold text-dark leading-tight mb-6">Electronic items</h2>
-             <button className="bg-white text-dark px-6 py-2 rounded-md font-medium hover:bg-shade transition-colors shadow-sm">
-               Learn more
-             </button>
+             
            </div>
         </div>
 

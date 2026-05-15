@@ -74,8 +74,7 @@ const Header = ({ setPage }) => {
               <span>All category</span>
             </div>
             <a href="#" className="hover:text-primary transition-colors" onClick={(e) => { e.preventDefault(); setPage('listing'); }}>Hot offers</a>
-            <a href="#" className="hover:text-primary transition-colors">Projects</a>
-            <a href="#" className="hover:text-primary transition-colors">Menu item</a>
+ 
             <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">
               <span>Help</span>
               <ChevronDown className="w-4 h-4" />
