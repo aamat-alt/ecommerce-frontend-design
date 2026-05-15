@@ -146,7 +146,7 @@ const ProductListing = ({ setPage }) => {
             viewMode === 'grid' ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {products.map((product) => (
-                  <div key={product._id} className="bg-white border border-[#DEE2E7] rounded-lg p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group flex flex-col items-center cursor-pointer" onClick={() => setPage('details')}>
+                  <div key={product._id} className="bg-white border border-[#DEE2E7] rounded-lg p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group flex flex-col items-center cursor-pointer" onClick={() => { localStorage.setItem('selectedProduct', JSON.stringify(product)); setPage('details'); }}>
                     <div className="w-full aspect-square flex items-center justify-center mb-4 bg-[#F7F7F7] rounded-md p-6 overflow-hidden">
                       {product.image ? <img src={product.image} alt={product.name} className="max-w-[85%] max-h-[85%] object-contain group-hover:scale-110 transition-transform duration-300" /> : <div className="text-5xl">📦</div>}
                     </div>
@@ -165,7 +165,7 @@ const ProductListing = ({ setPage }) => {
             ) : (
               <div className="space-y-3">
                 {products.map((product) => (
-                  <div key={product._id} className="bg-white border border-[#DEE2E7] rounded-lg p-5 flex gap-6 hover:shadow-md transition-shadow cursor-pointer relative" onClick={() => setPage('details')}>
+                  <div key={product._id} className="bg-white border border-[#DEE2E7] rounded-lg p-5 flex gap-6 hover:shadow-md transition-shadow cursor-pointer relative" onClick={() => { localStorage.setItem('selectedProduct', JSON.stringify(product)); setPage('details'); }}>
                     <div className="w-[180px] h-[180px] flex-shrink-0 flex items-center justify-center bg-[#F7F7F7] rounded-lg p-4">
                       {product.image ? <img src={product.image} alt={product.name} className="max-w-full max-h-full object-contain" /> : <div className="text-4xl">📦</div>}
                     </div>
