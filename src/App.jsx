@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Login from './components/Login';
+
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Deals from './components/Deals';
@@ -40,6 +42,7 @@ import itemE6 from './assets/Image/tech/image 23.png';
 import itemE7 from './assets/Image/tech/image 86.png';
 import itemE8 from './assets/Image/tech/6.png';
 
+
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
@@ -79,6 +82,8 @@ function App() {
         return <Messages setPage={setCurrentPage} />;
       case 'orders':
         return <Orders setPage={setCurrentPage} />;
+      case 'login':
+  return <Login setPage={setCurrentPage} />;  
       default:
         return (
           <div className="container">

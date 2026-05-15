@@ -31,9 +31,10 @@ const Header = ({ setPage }) => {
         </div>
 
         <div className="flex items-center gap-6">
-          <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" onClick={() => setPage('profile')}>
-            <User className="w-5 h-5 mb-1" />
-            <span className="text-xs">Profile</span>
+         
+          <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" onClick={() => setPage('login')}>
+           <User className="w-5 h-5 mb-1" />
+           <span className="text-xs">Login</span>
           </div>
           <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" onClick={() => setPage('message')}>
             <MessageSquare className="w-5 h-5 mb-1" />
