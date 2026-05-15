@@ -32,10 +32,24 @@ const Header = ({ setPage }) => {
 
         <div className="flex items-center gap-6">
          
-          <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" onClick={() => setPage('login')}>
-           <User className="w-5 h-5 mb-1" />
-           <span className="text-xs">Login</span>
-          </div>
+         <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" 
+  onClick={() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.reload();
+    } else {
+      setPage('login');
+    }
+  }}>
+  <User className="w-5 h-5 mb-1" />
+  <span className="text-xs">
+    {localStorage.getItem('user') ? 
+      JSON.parse(localStorage.getItem('user')).name.split(' ')[0] 
+      : 'Login'}
+  </span>
+</div>
           <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" onClick={() => setPage('message')}>
             <MessageSquare className="w-5 h-5 mb-1" />
             <span className="text-xs">Message</span>
