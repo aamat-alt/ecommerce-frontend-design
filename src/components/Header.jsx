@@ -38,14 +38,7 @@ const Header = ({ setPage }) => {
             <User className="w-5 h-5 mb-1" />
             <span className="text-xs">{user ? JSON.parse(user).name.split(' ')[0] : 'Login'}</span>
           </div>
-          <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" onClick={() => setPage('message')}>
-            <MessageSquare className="w-5 h-5 mb-1" />
-            <span className="text-xs">Message</span>
-          </div>
-          <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" onClick={() => setPage('orders')}>
-            <Heart className="w-5 h-5 mb-1" />
-            <span className="text-xs">Orders</span>
-          </div>
+
           <div className="flex flex-col items-center cursor-pointer text-secondary hover:text-primary transition-colors" onClick={() => setPage('cart')}>
             <ShoppingCart className="w-5 h-5 mb-1" />
             <span className="text-xs">My cart</span>

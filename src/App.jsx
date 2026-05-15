@@ -7,8 +7,6 @@ import ProductListing from './components/ProductListing';
 import ProductDetails from './components/ProductDetails';
 import Cart from './components/Cart';
 import Profile from './components/Profile';
-import Messages from './components/Messages';
-import Orders from './components/Orders';
 import Login from './components/Login';
 
 import homeBanner from './assets/Image/backgrounds/image 98.png';
@@ -34,6 +32,12 @@ import itemE8 from './assets/Image/tech/6.png';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const navigateToCategory = (cat) => {
+    setSelectedCategory(cat);
+    setCurrentPage('listing');
+  };
 
   const homeAndOutdoorItems = [
     { name: "Soft chairs", price: "19", image: itemH1 },
@@ -60,7 +64,7 @@ function App() {
   const renderContent = () => {
     switch (currentPage) {
       case 'listing':
-        return <ProductListing setPage={setCurrentPage} />;
+        return <ProductListing setPage={setCurrentPage} initialCategory={selectedCategory} />;
       case 'details':
         return <ProductDetails setPage={setCurrentPage} />;
       case 'cart':
@@ -76,7 +80,7 @@ function App() {
       default:
         return (
           <div className="container">
-            <Hero />
+            <Hero setPage={setCurrentPage} setCategory={navigateToCategory} />
             <CategorySection
               title="Home and outdoor"
               bannerBg="#FFE6BF"
