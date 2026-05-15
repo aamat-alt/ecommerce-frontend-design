@@ -3,7 +3,6 @@ import Login from './components/Login';
 
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Deals from './components/Deals';
 import CategorySection from './components/CategorySection';
 import InquiryForm from './components/InquiryForm';
 import RecommendedItems from './components/RecommendedItems';
@@ -88,7 +87,7 @@ function App() {
         return (
           <div className="container">
             <Hero />
-            <Deals />
+            
 
             <CategorySection
               title="Home and outdoor"
