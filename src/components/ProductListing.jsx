@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, Grid, List, ChevronDown, Star, Heart, X, Search, SlidersHorizontal } from 'lucide-react';
 import API from '../api';
 
-const ProductListing = ({ setPage, initialCategory }) => {
+const ProductListing = ({ setPage, initialCategory, searchQuery }) => {
   const [viewMode, setViewMode] = useState('grid');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,6 +15,15 @@ const ProductListing = ({ setPage, initialCategory }) => {
       setCategory(initialCategory);
     }
   }, [initialCategory]);
+
+  // ✅ NEW: sync searchQuery from Header into local search state
+  useEffect(() => {
+    if (searchQuery !== undefined && searchQuery !== '') {
+      setSearch(searchQuery);
+      setCurrentPage(1);
+    }
+  }, [searchQuery]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
@@ -33,7 +42,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
       setTotalPages(data.totalPages || 1);
       setTotal(data.total || productList.length);
 
-      // Extract unique categories from products
       if (categories.length === 0) {
         const allCats = [...new Set(productList.map(p => p.category).filter(Boolean))];
         setCategories(allCats);
@@ -61,7 +69,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
 
   const Sidebar = () => (
     <aside className="w-full space-y-2">
-      {/* Category Filter */}
       <div className="border-t border-[#DEE2E7] py-3">
         <h4 className="font-bold text-[#1C1C1C] mb-3 flex justify-between items-center">
           Category <ChevronDown className="w-4 h-4 opacity-50" />
@@ -86,7 +93,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
         </ul>
       </div>
 
-      {/* Price Range */}
       <div className="border-t border-[#DEE2E7] py-3">
         <h4 className="font-bold text-[#1C1C1C] mb-3 flex justify-between items-center cursor-pointer">
           Price range <ChevronDown className="w-4 h-4 opacity-50" />
@@ -106,7 +112,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
         </button>
       </div>
 
-      {/* Ratings */}
       <div className="border-t border-[#DEE2E7] py-3 pb-4">
         <h4 className="font-bold text-[#1C1C1C] mb-3">Ratings</h4>
         <div className="space-y-2">
@@ -123,7 +128,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
         </div>
       </div>
 
-      {/* Clear Filters Button */}
       {(search || category) && (
         <button
           onClick={clearFilters}
@@ -137,7 +141,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
 
   return (
     <div className="container py-4">
-      {/* Breadcrumbs */}
       <div className="flex items-center gap-2 text-[#8B96A5] text-sm mb-6">
         <span className="cursor-pointer hover:text-primary transition-colors" onClick={() => setPage('home')}>Home</span>
         <ChevronRight className="w-4 h-4" />
@@ -146,7 +149,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
         </span>
       </div>
 
-      {/* Search Bar */}
       <div className="flex gap-2 mb-6">
         <div className="flex-1 flex items-center border border-[#DEE2E7] rounded-lg px-4 py-2 bg-white shadow-sm">
           <Search size={18} className="text-[#8B96A5] mr-2 flex-shrink-0" />
@@ -165,7 +167,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
         >
           Search
         </button>
-        {/* Mobile Filter Toggle */}
         <button
           className="lg:hidden bg-white border border-[#DEE2E7] px-4 py-2 rounded-lg flex items-center gap-2 text-sm"
           onClick={() => setShowSidebar(!showSidebar)}
@@ -175,7 +176,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
         </button>
       </div>
 
-      {/* Mobile Sidebar */}
       {showSidebar && (
         <div className="lg:hidden bg-white border border-[#DEE2E7] rounded-lg p-4 mb-4">
           <div className="flex justify-between items-center mb-3">
@@ -187,14 +187,11 @@ const ProductListing = ({ setPage, initialCategory }) => {
       )}
 
       <div className="flex gap-6">
-        {/* Desktop Sidebar */}
         <div className="hidden lg:block w-[240px] flex-shrink-0">
           <Sidebar />
         </div>
 
-        {/* Main Content */}
         <main className="flex-1 min-w-0">
-          {/* Top Bar */}
           <div className="bg-white border border-[#DEE2E7] rounded-lg p-4 flex items-center justify-between mb-4 shadow-sm">
             <span className="text-[#1C1C1C] text-sm">
               <span className="font-bold">{total}</span> items found
@@ -219,7 +216,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
             </div>
           </div>
 
-          {/* Active Filters Tags */}
           {(search || category) && (
             <div className="flex flex-wrap items-center gap-2 mb-4">
               {category && (
@@ -240,21 +236,18 @@ const ProductListing = ({ setPage, initialCategory }) => {
             </div>
           )}
 
-          {/* Loading */}
           {loading && (
             <div className="flex justify-center items-center py-20">
               <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
             </div>
           )}
 
-          {/* Error */}
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-600 text-sm">
               {error}
             </div>
           )}
 
-          {/* Empty */}
           {!loading && !error && products.length === 0 && (
             <div className="flex flex-col justify-center items-center py-20 gap-4">
               <div className="text-5xl">🔍</div>
@@ -267,7 +260,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
             </div>
           )}
 
-          {/* Products Grid */}
           {!loading && !error && products.length > 0 && (
             viewMode === 'grid' ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -366,7 +358,6 @@ const ProductListing = ({ setPage, initialCategory }) => {
             )
           )}
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex justify-end mt-8">
               <div className="flex border border-[#DEE2E7] rounded-md overflow-hidden bg-white shadow-sm">
